@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TesteBarDg.Models;
 
 namespace TesteBarDg.Controllers
 {
@@ -17,10 +18,12 @@ namespace TesteBarDg.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly BarDgContext _barDgContext;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, BarDgContext barDgContext)
         {
             _logger = logger;
+            _barDgContext = barDgContext;
         }
 
         [HttpGet]
@@ -34,6 +37,14 @@ namespace TesteBarDg.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet]
+        [Route("/lista-itens")]
+        public IEnumerable<Itens> ListaItens()
+        {
+            var rng = new Random();
+            return _barDgContext.Itens.ToList();
         }
     }
 }
