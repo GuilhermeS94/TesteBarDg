@@ -1,6 +1,7 @@
 # TesteBarDg
 
 1 - Banco de dados > sqlite3 > BarDg
+
 2 - Tabelas e alimentacao:
   create table comandas (id integer not null primary key);
   insert into comandas(id) values (1), (2), (3), (4);
