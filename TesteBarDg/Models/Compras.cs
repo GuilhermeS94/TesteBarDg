@@ -5,6 +5,7 @@ namespace TesteBarDg.Models
 {
     public partial class Compras
     {
+        public long Id { get; set; }
         public long IdComanda { get; set; }
         public long IdItem { get; set; }
 

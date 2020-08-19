@@ -19,6 +19,7 @@ namespace TesteBarDg.Models
         public virtual DbSet<Comandas> Comandas { get; set; }
         public virtual DbSet<Compras> Compras { get; set; }
         public virtual DbSet<Itens> Itens { get; set; }
+        public virtual DbSet<NotaFiscal> NotaFiscal { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -45,21 +46,23 @@ namespace TesteBarDg.Models
 
             modelBuilder.Entity<Compras>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("compras");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.IdComanda).HasColumnName("idComanda");
 
                 entity.Property(e => e.IdItem).HasColumnName("idItem");
 
                 entity.HasOne(d => d.IdComandaNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Compras)
                     .HasForeignKey(d => d.IdComanda)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.IdItemNavigation)
-                    .WithMany()
+                    .WithMany(p => p.Compras)
                     .HasForeignKey(d => d.IdItem)
                     .OnDelete(DeleteBehavior.ClientSetNull);
             });
