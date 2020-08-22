@@ -25,15 +25,17 @@ namespace TesteBarDg.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetItensComprados(int id)
+        [HttpGet("{id_comanda}")]
+        public async Task<IActionResult> GetItensComprados(GerarExtratoCommand comanda)
         {
             /*var lista = _barDgContext.NotaFiscal
             .FromSqlRaw("select i.id, i.nome, count(i.id) as quantidade, sum(i.valor) as total from itens i inner join compras c on i.id = c.idItem where c.idComanda = 1 group by i.id;", id)
             .ToList();
             return Json(lista);*/
 
-            return Json("OK");
+            var retorno = await _mediator.Send(comanda);
+
+            return Json(retorno);
         }
 
         [HttpPost("comprar")]
