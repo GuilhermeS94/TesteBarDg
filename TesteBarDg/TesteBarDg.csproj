@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
 
@@ -12,5 +13,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="MediatR" Version="8.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="TesteBarDg.Domain\obj\Debug\netcoreapp3.1\TesteBarDg.Domain.csproj.CoreCompileInputs.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="TesteBarDg.Domain\bin\Debug\netcoreapp3.1\TesteBarDg.Domain.deps.json" />
+    <Content Remove="TesteBarDg.Domain\bin\Debug\netcoreapp3.1\TesteBarDg.Domain.deps.json" />
+    <Content Remove="TesteBarDg.Domain\bin\Debug\netcoreapp3.1\TesteBarDg.Domain.deps.json" />
+    <Content Remove="TesteBarDg.Domain\bin\Debug\netcoreapp3.1\TesteBarDg.Domain.deps.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="TesteBarDg.Domain\TesteBarDg.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

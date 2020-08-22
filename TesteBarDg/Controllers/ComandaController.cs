@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using TesteBarDg.Domain.Commands;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,10 +17,12 @@ namespace TesteBarDg.Controllers
     public class ComandaController : Controller
     {
         private readonly ILogger<ComandaController> _logger;
+        private readonly IMediator _mediator;
 
-        public ComandaController(ILogger<ComandaController> logger)
+        public ComandaController(ILogger<ComandaController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
@@ -33,13 +37,15 @@ namespace TesteBarDg.Controllers
         }
 
         [HttpPost("comprar")]
-        public IActionResult RegistrarCompra([FromBody] int compra)
+        public async Task<IActionResult> RegistrarCompra([FromBody] ItemCompradoCommand compra)
         {
             /*_barDgContext.Compras.Add(compra);
             _barDgContext.SaveChanges();
             return Json(new { compra_efetuada = true }); */
 
-            return Json("OK");
+            var retorno = await _mediator.Send(compra);
+
+            return Json(retorno);
         }
 
         [HttpDelete("limpar/{id}")]
