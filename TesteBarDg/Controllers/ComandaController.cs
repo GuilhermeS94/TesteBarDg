@@ -29,11 +29,6 @@ namespace TesteBarDg.Controllers
         [HttpGet("{IdComanda}")]
         public async Task<IActionResult> GerarExtrato([FromRoute] GerarExtratoCommand comanda)
         {
-            /*var lista = _barDgContext.NotaFiscal
-            .FromSqlRaw("select i.id, i.nome, count(i.id) as quantidade, sum(i.valor) as total from itens i inner join compras c on i.id = c.idItem where c.idComanda = 1 group by i.id;", id)
-            .ToList();
-            return Json(lista);*/
-
             var retorno = await _mediator.Send(comanda);
 
             return Json(retorno);
@@ -42,10 +37,6 @@ namespace TesteBarDg.Controllers
         [HttpPost("comprar")]
         public async Task<IActionResult> RegistrarCompra([FromBody] ItemCompradoCommand compra)
         {
-            /*_barDgContext.Compras.Add(compra);
-            _barDgContext.SaveChanges();
-            return Json(new { compra_efetuada = true }); */
-
             var retorno = await _mediator.Send(compra);
 
             return Json(retorno);
@@ -54,11 +45,6 @@ namespace TesteBarDg.Controllers
         [HttpDelete("limpar/{IdComanda}")]
         public async Task<IActionResult> LimparComanda([FromRoute] ResetarComandaCommand comanda)
         {
-            /*var lista = _barDgContext.Compras.Where(x => x.IdComanda == id).ToList();
-            _barDgContext.Compras.RemoveRange(lista);
-            _barDgContext.SaveChanges();
-            return Json(new { comanda_resetada = true }); */
-
             var retorno = await _mediator.Send(comanda);
 
             return Json(retorno);

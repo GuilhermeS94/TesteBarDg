@@ -18,5 +18,14 @@
 
 5. Para o front, estou pensando em um html simples, com js bem estruturado, subindo um servidorzinho gulp.
 
-
 6. Swagger adicionado: https://localhost:5001/swagger/index.html
+
+7. LINQ utilizado para logicas promocionais, verificacao na hora da efetivacao da compra, para facilitar na saida para gerar o extrato
+
+
+
+## Pontos a melhorar
+1. Implementar o Login e token
+2. Implementar um tratamento de erros global
+3. Implementar validacoes de campos
+4. Nao utilizar LINQ, maior queda de performance entre Entity, Dapper e LINQ

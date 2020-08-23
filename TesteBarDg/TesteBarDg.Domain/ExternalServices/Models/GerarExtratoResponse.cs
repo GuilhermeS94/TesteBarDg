@@ -10,7 +10,7 @@ namespace TesteBarDg.Domain.ExternalServices.Models
         {
         }
 
-        public ICollection<ItemComprado> ItensComprados { get; set; }
+        public List<ItemComprado> ItensComprados { get; set; }
         public double ValorTotal { get; set; }
     }
 
@@ -19,5 +19,6 @@ namespace TesteBarDg.Domain.ExternalServices.Models
         public long Id { get; set; }
         public string Nome { get; set; }
         public double Valor { get; set; }
+        public long ItemPromocional { get; set; }
     }
 }
