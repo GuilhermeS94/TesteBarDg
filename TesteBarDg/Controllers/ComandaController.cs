@@ -25,7 +25,7 @@ namespace TesteBarDg.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{id_comanda}")]
+        [HttpGet("{IdComanda}")]
         public async Task<IActionResult> GerarExtrato([FromRoute] GerarExtratoCommand comanda)
         {
             /*var lista = _barDgContext.NotaFiscal
@@ -50,15 +50,17 @@ namespace TesteBarDg.Controllers
             return Json(retorno);
         }
 
-        [HttpDelete("limpar/{id}")]
-        public IActionResult LimparComanda(int id)
+        [HttpDelete("limpar/{IdComanda}")]
+        public async Task<IActionResult> LimparComanda([FromRoute] ResetarComandaCommand comanda)
         {
             /*var lista = _barDgContext.Compras.Where(x => x.IdComanda == id).ToList();
             _barDgContext.Compras.RemoveRange(lista);
             _barDgContext.SaveChanges();
             return Json(new { comanda_resetada = true }); */
 
-            return Json("OK");
+            var retorno = await _mediator.Send(comanda);
+
+            return Json(retorno);
         }
     }
 }

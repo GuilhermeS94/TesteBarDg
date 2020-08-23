@@ -11,22 +11,49 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using TesteBarDg.Domain.Commands;
+using FluentValidation.AspNetCore;
+using System.Reflection;
+using MediatR;
 
 namespace TesteBarDg
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Env = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            var assemblyLimc = typeof(ListarItensMenuCommand).Assembly;
+            var assemblyGec = typeof(GerarExtratoCommand).Assembly;
+            var assemblyIcc = typeof(ItemCompradoCommand).Assembly;
+            var assemblyRcc = typeof(ResetarComandaCommand).Assembly;
+            var lista = new List<Assembly>();
+            lista.Add(assemblyLimc);
+            lista.Add(assemblyGec);
+            lista.Add(assemblyIcc);
+            lista.Add(assemblyRcc);
+
+            services
+                .AddMvcCore()
+                .AddApiExplorer()
+                .AddFluentValidation(setup => setup.RegisterValidatorsFromAssemblies(lista))
+                //.AddSnakeCaseStrategy()
+                .AddNewtonsoftJson();
+
+            services
+                .AddMediatR(new Assembly[] {assemblyLimc, assemblyGec, assemblyIcc, assemblyRcc })
+                .AddServices(Configuration, Env)
+                .AddHealthChecks();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,13 +67,16 @@ namespace TesteBarDg
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            //app.UseMetrics();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            //app.UseSwagger(Configuration);
         }
     }
 }
