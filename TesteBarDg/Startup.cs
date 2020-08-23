@@ -15,6 +15,7 @@ using TesteBarDg.Domain.Commands;
 using FluentValidation.AspNetCore;
 using System.Reflection;
 using MediatR;
+using Microsoft.OpenApi.Models;
 
 namespace TesteBarDg
 {
@@ -32,6 +33,23 @@ namespace TesteBarDg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddSwaggerGen(c => {
+
+                c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Bardo do DG",
+                        Version = "v1",
+                        Description = "Teste ClearSale - Bar do DG",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Guilherme Silva",
+                            Url = new Uri("https://github.com/GuilhermeS94/TesteBarDg")
+                        }
+                    });
+            });
+
             var assemblyLimc = typeof(ListarItensMenuCommand).Assembly;
             var assemblyGec = typeof(GerarExtratoCommand).Assembly;
             var assemblyIcc = typeof(ItemCompradoCommand).Assembly;
@@ -46,7 +64,6 @@ namespace TesteBarDg
                 .AddMvcCore()
                 .AddApiExplorer()
                 .AddFluentValidation(setup => setup.RegisterValidatorsFromAssemblies(lista))
-                //.AddSnakeCaseStrategy()
                 .AddNewtonsoftJson();
 
             services
@@ -64,19 +81,18 @@ namespace TesteBarDg
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Bar do DG");
+            });
+
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            //app.UseMetrics();
-
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-            //app.UseSwagger(Configuration);
         }
     }
 }
