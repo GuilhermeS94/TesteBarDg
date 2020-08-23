@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TesteBarDg.Domain.Commands;
+using TesteBarDg.Infra.Models;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,12 +17,12 @@ namespace TesteBarDg.Controllers
     [Route("[controller]")]
     public class ComandaController : Controller
     {
-        private readonly ILogger<ComandaController> _logger;
+        private readonly BarDgContext _barDgContext;
         private readonly IMediator _mediator;
 
-        public ComandaController(ILogger<ComandaController> logger, IMediator mediator)
+        public ComandaController(BarDgContext barDgContext, IMediator mediator)
         {
-            _logger = logger;
+            _barDgContext = barDgContext;
             _mediator = mediator;
         }
 

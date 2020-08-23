@@ -14,11 +14,14 @@ namespace TesteBarDg.Domain.Models
         public ICollection<Item> ItensMenu { get; set; }
     }
 
-
+    [Serializable]
     public class Item
     {
+        [JsonProperty("id_item")]
         public long Id { get; set; }
+        [JsonProperty("nome_item")]
         public string Nome { get; set; }
+        [JsonProperty("valor_item")]
         public double Valor { get; set; }
     }
 }

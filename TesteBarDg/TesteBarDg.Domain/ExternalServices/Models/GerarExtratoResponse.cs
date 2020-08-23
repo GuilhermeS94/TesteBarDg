@@ -10,10 +10,7 @@ namespace TesteBarDg.Domain.ExternalServices.Models
         {
         }
 
-        [JsonProperty("itens_comprados")]
         public ICollection<ItemComprado> ItensComprados { get; set; }
-
-        [JsonProperty("valor_total")]
         public double ValorTotal { get; set; }
     }
 

@@ -16,6 +16,7 @@ using FluentValidation.AspNetCore;
 using System.Reflection;
 using MediatR;
 using Microsoft.OpenApi.Models;
+using TesteBarDg.Infra.Models;
 
 namespace TesteBarDg
 {
@@ -33,6 +34,9 @@ namespace TesteBarDg
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BarDgContext>(options =>
+                 options.UseSqlite(Configuration.GetConnectionString("BarDgDb")));
+
             services.AddControllers();
             services.AddSwaggerGen(c => {
 

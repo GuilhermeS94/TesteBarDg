@@ -9,10 +9,7 @@ namespace TesteBarDg.Domain.ExternalServices.Models
         {
         }
 
-        [JsonProperty("mensagem")]
         public string Mensagem { get; set; }
-
-        [JsonProperty("sucesso")]
         public bool Sucesso { get; set; }
     }
 }
