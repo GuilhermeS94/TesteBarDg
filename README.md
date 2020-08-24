@@ -34,3 +34,4 @@
 4. Nao utilizar LINQ, maior queda de performance entre Entity, Dapper e LINQ
 5. Realizar totalmente os testes dos cenarios possiveis, validando regras de negocio (promocao), com erro tratado e com exception
 6. Um front descente (nao é minha especialidade front, mas...)
+7. Fazer front funcionar, esta com problemas de cross origin request (como alternativa segue collections do postman (as quais usei para testar aplicacao e funcionam))

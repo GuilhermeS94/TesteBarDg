@@ -2,14 +2,13 @@ var MAIN = (function(){
     return{
 
         init: function(){
-            
             MAIN.construirMenu();
         },
 
         construirMenu: function(){
             $.ajax({
                 method: "GET",
-                url: "https://localhost:5001/login/lista-itens"
+                url: "https://localhost:5000/menu/lista-itens"
             })
             .done(function(retornoOK) {
                 $("#itens_menu").html("");
@@ -106,15 +105,5 @@ var MAIN = (function(){
                 alert(JSON.stringify(retornoErro));
             });
         }
-    };
-})();
-
-var UTILS = (function(){
-    return{
-
-        criarItemMenu: function(){
-            var novoItem = document.createElement("LI");
-            novoItem.className = "list-group-item";
-        },
     };
 })();
