@@ -16,7 +16,10 @@
     .Infra > onde fica o processamento e logica dos dados de entrada, o que precisa ser feito para devolver a devida saida.
     .Test > onde ficam os testes integrados da API
 
-5. Para o front, estou pensando em um html simples, com js bem estruturado, subindo um servidorzinho gulp.
+5. Para o front, um html simples, com js bem estruturado, subindo um servidorzinho gulp.
+  - Rodar "npm install" para instalar dependencias gulp e subir um servidor (digitar "gulp" no cmd, na pasta do projeto sem aspas e teclar enter, para subir servidor)
+  - Caso comando gulp ainda nao funcione instalar global os pacotes gulp-cli (npm install -g gulp-cli)
+  - alternativa: no vs code há uma extensao chamada IIS Express Server, instale-a, tecle f1 > Start IIS Express, e subirá um servidor
 
 6. Swagger adicionado: https://localhost:5001/swagger/index.html
 
@@ -29,3 +32,5 @@
 2. Implementar um tratamento de erros global
 3. Implementar validacoes de campos
 4. Nao utilizar LINQ, maior queda de performance entre Entity, Dapper e LINQ
+5. Realizar totalmente os testes dos cenarios possiveis, validando regras de negocio (promocao), com erro tratado e com exception
+6. Um front descente (nao é minha especialidade front, mas...)
